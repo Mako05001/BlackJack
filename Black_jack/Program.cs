@@ -1,11 +1,13 @@
-﻿
-
 Random card = new Random();
 string Last = "Ingen har vunnit än";
 Console.WriteLine("Välkommen till blackjack");
 string svar = "0";
+Console.BackgroundColor = ConsoleColor.White;
+Console.Clear();
+Console.ForegroundColor = ConsoleColor.Black;
 while (svar != "4")
 {
+    Console.ForegroundColor= ConsoleColor.Black;
     Console.WriteLine("Välj en av alternativen");
     Console.WriteLine("1. Spela");
     Console.WriteLine("2. Visa senaste vinnaren");
@@ -49,6 +51,7 @@ while (svar != "4")
             }
             if (player > 21)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Du har mer än 21. Du förlorar");
                 Console.WriteLine();
                 break;
@@ -64,14 +67,17 @@ while (svar != "4")
             Console.WriteLine();
             if (dealer > 21)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Du har vunnit");
+                Console.ForegroundColor = ConsoleColor.Black;
                 Console.WriteLine("Skriv ditt namn");
                 Last = Console.ReadLine();
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Datorn har vunnit");
-                Console.WriteLine();
+                Console.WriteLine();           
             }
             break;
         case "2":
