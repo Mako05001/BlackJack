@@ -2,12 +2,15 @@ Random card = new Random();
 string Last = "Ingen har vunnit än";
 Console.WriteLine("Välkommen till blackjack");
 string svar = "0";
+int Maxcardpoints = 11;
+int Mincardpoints = 1;
+int Maxpoints = 21;
 Console.BackgroundColor = ConsoleColor.White;
 Console.Clear();
 Console.ForegroundColor = ConsoleColor.Black;
 while (svar != "4")
 {
-    Console.ForegroundColor= ConsoleColor.Black;
+    Console.ForegroundColor = ConsoleColor.Black;
     Console.WriteLine("Välj en av alternativen");
     Console.WriteLine("1. Spela");
     Console.WriteLine("2. Visa senaste vinnaren");
@@ -21,12 +24,12 @@ while (svar != "4")
             int player = 0;
             int dealer = 0;
             Console.WriteLine("Nu dras två kort");
-            dealer += card.Next(1, 11);
-            dealer += card.Next(1, 11);
-            player += card.Next(1, 11);
-            player += card.Next(1, 11);
+            dealer += card.Next(Mincardpoints, Maxcardpoints);
+            dealer += card.Next(Mincardpoints, Maxcardpoints);
+            player += card.Next(Mincardpoints, Maxcardpoints);
+            player += card.Next(Mincardpoints, Maxcardpoints);
             string Val = " ";
-            while (Val != "n" && player <= 21)
+            while (Val != "n" && player <= Maxpoints)
             {
                 Console.WriteLine($"Du har {player}");
                 Console.WriteLine($"Dator har {dealer}");
@@ -35,7 +38,7 @@ while (svar != "4")
                 switch (Val)
                 {
                     case "j":
-                        int newcard = card.Next(1, 11);
+                        int newcard = card.Next(Mincardpoints, Maxcardpoints);
                         player += newcard;
                         Console.WriteLine($"Du drog {newcard}");
                         Console.WriteLine($"Nu har du {player}");
@@ -49,23 +52,23 @@ while (svar != "4")
 
                 }
             }
-            if (player > 21)
+            if (player > Maxpoints)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Du har mer än 21. Du förlorar");
                 Console.WriteLine();
                 break;
             }
-            while (dealer < player && dealer < 21)
+            while (dealer < player && dealer < Maxpoints)
             {
-                int newcard = card.Next(1, 11);
+                int newcard = card.Next(Mincardpoints, Maxcardpoints);
                 dealer += newcard;
                 Console.WriteLine($"datorn drog ett nytt kort som är värt {newcard}");
                 Console.WriteLine();
             }
             Console.WriteLine($"Datorn har {dealer} poäng");
             Console.WriteLine();
-            if (dealer > 21)
+            if (dealer > Maxpoints)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Du har vunnit");
@@ -73,11 +76,17 @@ while (svar != "4")
                 Console.WriteLine("Skriv ditt namn");
                 Last = Console.ReadLine();
             }
+            if (dealer == player)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Ingen vann");
+                Console.WriteLine();
+            }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Datorn har vunnit");
-                Console.WriteLine();           
+                Console.WriteLine();
             }
             break;
         case "2":
